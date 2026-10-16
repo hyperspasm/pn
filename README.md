@@ -299,3 +299,15 @@ pn_add_manifest_test(NAME mixer_manifest TOOL mixer_schema EXPECTED ${CMAKE_SOUR
 ```
 
 The comparison is made in canonical form, so the committed file may carry comments and its own whitespace, and the hash it declares must match the tool's. When the test fails, the schema changed: regenerate the file with the tool, and the diff shows the change in review. pn's own example manifests live in [test/fixtures/](test/fixtures/).
+
+## Building
+
+nanopb is a submodule at `extern/nanopb`, so clone with `--recurse-submodules`, or run `git submodule update --init` in a clone that lacks it. The library, its example and its tests need CMake and a C compiler:
+
+```bash
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build
+```
+
+ctest also runs the JavaScript client's tests when Node is installed.
